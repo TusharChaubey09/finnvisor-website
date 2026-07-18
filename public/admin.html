@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Finnvisor Admin - Enquiries</title>
+<style>
+  body { font-family: Arial, sans-serif; background:#f1f5f9; padding:40px; }
+  h1 { color:#0f172a; }
+  table { width:100%; border-collapse:collapse; background:white; margin-top:20px; }
+  th, td { padding:12px; border:1px solid #e2e8f0; text-align:left; }
+  th { background:#0f172a; color:white; }
+  #tokenBox { margin-bottom:20px; }
+  input { padding:10px; width:250px; }
+  button { padding:10px 16px; cursor:pointer; }
+</style>
+</head>
+<body>
+<h1>Finnvisor — Customer Enquiries</h1>
+<div id="tokenBox">
+  <input type="password" id="tokenInput" placeholder="Enter admin token">
+  <button onclick="loadEnquiries()">View Enquiries</button>
+</div>
+<div id="result"></div>
+<script src="admin.js"></script>
+</body>
+</html>

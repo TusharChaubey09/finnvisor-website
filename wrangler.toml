@@ -1,0 +1,8 @@
+name = "finnvisor-website"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "public"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "finnvisor_db"
+database_id = "cd6b513d-c806-4454-9e55-05cbac8340ff"
