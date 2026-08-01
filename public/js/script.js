@@ -1,37 +1,128 @@
-document.getElementById('enquiryForm').addEventListener('submit', async function (e) {
-  e.preventDefault();
+// ===============================
+// Mobile Navigation
+// ===============================
 
-  const name = document.getElementById('name').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const msgEl = document.getElementById('formMessage');
-  const submitBtn = e.target.querySelector('button');
+const hamburger = document.getElementById("hamburger");
 
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Submitting...';
+const navLinks = document.getElementById("navLinks");
 
-  try {
-    const res = await fetch('/api/enquiry', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, phone, email })
+if(hamburger && navLinks){
+
+    hamburger.addEventListener("click",()=>{
+
+        navLinks.classList.toggle("active");
+
     });
 
-    const data = await res.json();
+    document.querySelectorAll("#navLinks a").forEach(link=>{
 
-    if (res.ok) {
-      msgEl.style.color = '#4ade80';
-      msgEl.textContent = "Thank you! We've received your enquiry and will contact you shortly.";
-      e.target.reset();
-    } else {
-      msgEl.style.color = '#f87171';
-      msgEl.textContent = data.error || 'Something went wrong. Please try again.';
-    }
-  } catch (err) {
-    msgEl.style.color = '#f87171';
-    msgEl.textContent = 'Network error. Please try again.';
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Submit Enquiry';
-  }
+        link.addEventListener("click",()=>{
+
+            navLinks.classList.remove("active");
+
+        });
+
+    });
+
+    document.addEventListener("click",(e)=>{
+
+        if(
+
+            !hamburger.contains(e.target) &&
+            !navLinks.contains(e.target)
+
+        ){
+
+            navLinks.classList.remove("active");
+
+        }
+
+    });
+
+}
+
+
+
+// ===============================
+// Enquiry Form
+// ===============================
+
+const enquiryForm=document.getElementById("enquiryForm");
+
+if(enquiryForm){
+
+enquiryForm.addEventListener("submit",async function(e){
+
+e.preventDefault();
+
+const name=document.getElementById("name").value.trim();
+
+const phone=document.getElementById("phone").value.trim();
+
+const email=document.getElementById("email").value.trim();
+
+const msgEl=document.getElementById("formMessage");
+
+const submitBtn=e.target.querySelector("button");
+
+submitBtn.disabled=true;
+
+submitBtn.textContent="Submitting...";
+
+try{
+
+const res=await fetch("/api/enquiry",{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify({
+
+name,
+
+phone,
+
+email
+
+})
+
 });
+
+const data=await res.json();
+
+if(res.ok){
+
+msgEl.style.color="#22C55E";
+
+msgEl.textContent="Thank you! We will contact you shortly.";
+
+e.target.reset();
+
+}else{
+
+msgEl.style.color="#EF4444";
+
+msgEl.textContent=data.error || "Something went wrong.";
+
+}
+
+}catch{
+
+msgEl.style.color="#EF4444";
+
+msgEl.textContent="Network Error.";
+
+}
+
+submitBtn.disabled=false;
+
+submitBtn.textContent="Schedule Free Consultation";
+
+});
+
+}
