@@ -3,20 +3,19 @@
 // ===============================
 
 const hamburger = document.getElementById("hamburger");
-
 const navLinks = document.getElementById("navLinks");
 
-if(hamburger && navLinks){
+if (hamburger && navLinks) {
 
-    hamburger.addEventListener("click",()=>{
+    hamburger.addEventListener("click", () => {
 
         navLinks.classList.toggle("active");
 
     });
 
-    document.querySelectorAll("#navLinks a").forEach(link=>{
+    document.querySelectorAll("#navLinks a").forEach(link => {
 
-        link.addEventListener("click",()=>{
+        link.addEventListener("click", () => {
 
             navLinks.classList.remove("active");
 
@@ -24,14 +23,12 @@ if(hamburger && navLinks){
 
     });
 
-    document.addEventListener("click",(e)=>{
+    document.addEventListener("click", (e) => {
 
-        if(
-
+        if (
             !hamburger.contains(e.target) &&
             !navLinks.contains(e.target)
-
-        ){
+        ) {
 
             navLinks.classList.remove("active");
 
@@ -42,98 +39,109 @@ if(hamburger && navLinks){
 }
 
 
-
 // ===============================
 // Enquiry Form
 // ===============================
 
-const enquiryForm=document.getElementById("enquiryForm");
+const enquiryForm = document.getElementById("enquiryForm");
 
-if(enquiryForm){
+if (enquiryForm) {
 
-enquiryForm.addEventListener("submit",async function(e){
+    enquiryForm.addEventListener("submit", async function (e) {
 
-e.preventDefault();
+        e.preventDefault();
 
-const name=document.getElementById("name").value.trim();
+        const name = document.getElementById("name").value.trim();
 
-const phone=document.getElementById("phone").value.trim();
+        const phone = document.getElementById("phone").value.trim();
 
-const email=document.getElementById("email").value.trim();
+        const email = document.getElementById("email").value.trim();
 
-const msgEl=document.getElementById("formMessage");
+        const service = document.getElementById("service").value;
 
-const submitBtn=e.target.querySelector("button");
+        const message = document.getElementById("message").value.trim();
 
-submitBtn.disabled=true;
+        const msgEl = document.getElementById("formMessage");
 
-submitBtn.textContent="Submitting...";
+        const submitBtn = e.target.querySelector("button");
 
-try{
+        submitBtn.disabled = true;
 
-const res=await fetch("/api/enquiry",{
+        submitBtn.textContent = "Submitting...";
 
-method:"POST",
+        try {
 
-headers:{
+            const res = await fetch("/api/enquiry", {
 
-"Content-Type":"application/json"
+                method: "POST",
 
-},
+                headers: {
 
-body:JSON.stringify({
+                    "Content-Type": "application/json"
 
-name,
+                },
 
-phone,
+                body: JSON.stringify({
 
-email
+                    name,
+                    phone,
+                    email,
+                    service,
+                    message
 
-})
+                })
 
-});
+            });
 
-const data=await res.json();
+            const data = await res.json();
 
-if(res.ok){
+            if (res.ok) {
 
-msgEl.style.color="#22C55E";
+                msgEl.style.color = "#22C55E";
 
-msgEl.textContent="Thank you! We will contact you shortly.";
+                msgEl.textContent = "Thank you! We will contact you shortly.";
 
-e.target.reset();
+                e.target.reset();
 
-}else{
+            }
+            else {
 
-msgEl.style.color="#EF4444";
+                msgEl.style.color = "#EF4444";
 
-msgEl.textContent=data.error || "Something went wrong.";
+                msgEl.textContent = data.error || "Something went wrong.";
+
+            }
+
+        }
+        catch {
+
+            msgEl.style.color = "#EF4444";
+
+            msgEl.textContent = "Network Error.";
+
+        }
+
+        submitBtn.disabled = false;
+
+        submitBtn.textContent = "Schedule Free Consultation";
+
+    });
 
 }
 
-}catch{
 
-msgEl.style.color="#EF4444";
+// ===============================
+// Call Popup
+// ===============================
 
-msgEl.textContent="Network Error.";
-
-}
-
-submitBtn.disabled=false;
-
-submitBtn.textContent="Schedule Free Consultation";
-
-});
-}
-function openCallPopup(){
+function openCallPopup() {
 
     document.getElementById("callPopup").classList.add("active");
 
 }
 
-function closeCallPopup(){
+function closeCallPopup() {
 
     document.getElementById("callPopup").classList.remove("active");
 
 }
-

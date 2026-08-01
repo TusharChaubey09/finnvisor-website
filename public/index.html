@@ -403,50 +403,78 @@ Explore Services
 
         <!-- RIGHT -->
 
-        <div class="consultation-form">
+      <div class="consultation-form">
 
-            <form>
+    <form id="enquiryForm">
 
-                <input type="text"
-                       placeholder="Full Name">
+        <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Full Name"
+            required>
 
-                <input type="tel"
-                       placeholder="Phone Number">
+        <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Phone Number"
+            required>
 
-                <input type="email"
-                       placeholder="Email Address">
+        <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email Address"
+            required>
 
-                <select>
+        <select
+            id="service"
+            name="service"
+            required>
 
-                    <option>Select Service</option>
+            <option value="">Select Service</option>
 
-                    <option>Company Registration</option>
+            <option value="Company Registration">
+                Company Registration
+            </option>
 
-                    <option>GST Registration</option>
+            <option value="GST Registration">
+                GST Registration
+            </option>
 
-                    <option>Trademark</option>
+            <option value="Trademark Registration">
+                Trademark Registration
+            </option>
 
-                    <option>MSME</option>
+            <option value="MSME Registration">
+                MSME Registration
+            </option>
 
-                    <option>ROC Compliance</option>
+            <option value="ROC Compliance">
+                ROC Compliance
+            </option>
 
-                </select>
+        </select>
 
-                <textarea
-                    placeholder="Tell us about your requirement"></textarea>
+        <textarea
+            id="message"
+            name="message"
+            rows="5"
+            placeholder="Tell us about your requirement"
+            required></textarea>
 
-                <button>
+        <button type="submit">
 
-                    Schedule Free Consultation
+            Schedule Free Consultation
 
-                </button>
+        </button>
 
-            </form>
+        <p id="formMessage"></p>
 
-        </div>
+    </form>
 
-    </div>
-
+</div>
 </section>
 <!--====================================
 CONTACT INFORMATION

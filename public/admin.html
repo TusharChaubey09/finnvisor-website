@@ -1,26 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<title>Finnvisor Admin - Enquiries</title>
-<style>
-  body { font-family: Arial, sans-serif; background:#f1f5f9; padding:40px; }
-  h1 { color:#0f172a; }
-  table { width:100%; border-collapse:collapse; background:white; margin-top:20px; }
-  th, td { padding:12px; border:1px solid #e2e8f0; text-align:left; }
-  th { background:#0f172a; color:white; }
-  #tokenBox { margin-bottom:20px; }
-  input { padding:10px; width:250px; }
-  button { padding:10px 16px; cursor:pointer; }
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Finnvisor Admin</title>
+
+<link rel="stylesheet" href="css/admin.css">
+
 </head>
+
 <body>
-<h1>Finnvisor — Customer Enquiries</h1>
-<div id="tokenBox">
-  <input type="password" id="tokenInput" placeholder="Enter admin token">
-  <button onclick="loadEnquiries()">View Enquiries</button>
+
+<div class="login-page" id="loginPage">
+
+    <div class="login-box">
+
+        <h1>Finnvisor</h1>
+
+        <p>Admin Login</p>
+
+        <input
+            type="password"
+            id="tokenInput"
+            placeholder="Enter Admin Password">
+
+        <button onclick="loadEnquiries()">
+
+            Login
+
+        </button>
+
+        <p id="loginError"></p>
+
+    </div>
+
 </div>
-<div id="result"></div>
+
+
+<div class="dashboard" id="dashboard" style="display:none;">
+
+<header>
+
+<h2>Finnvisor Admin Dashboard</h2>
+
+<button onclick="logout()">
+
+Logout
+
+</button>
+
+</header>
+
+<div class="stats">
+
+<div class="card">
+
+<h3>Total Enquiries</h3>
+
+<p id="totalCount">0</p>
+
+</div>
+
+<div class="card">
+
+<h3>Today's Enquiries</h3>
+
+<p id="todayCount">0</p>
+
+</div>
+
+</div>
+
+<div class="search">
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search by Name, Phone or Email">
+
+</div>
+
+<div id="tableContainer"></div>
+
+</div>
+
 <script src="js/admin.js"></script>
+
 </body>
 </html>
