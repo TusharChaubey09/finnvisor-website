@@ -13,9 +13,9 @@ CREATE TABLE IF NOT EXISTS enquiries (
     message TEXT NOT NULL,
 
     status TEXT NOT NULL DEFAULT 'Pending',
-
-    created_at TEXT DEFAULT (datetime('now')),
-
-    updated_at TEXT DEFAULT (datetime('now'))
+  
+    created_at TEXT DEFAULT (datetime('now', '+5 hours', '+30 minutes')),
+    
+    updated_at TEXT DEFAULT (datetime('now', '+5 hours', '+30 minutes'))
 
 );
