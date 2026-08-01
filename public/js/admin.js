@@ -1,4 +1,5 @@
 let enquiries = [];
+let deleteId = null;
 
 
 // ===============================
@@ -94,6 +95,8 @@ function renderTable(data) {
 
                 <th>View</th>
 
+                <th>Delete</th>
+
             </tr>
 
         </thead>
@@ -121,41 +124,52 @@ onchange="updateStatus(${row.id}, this.value, this)">
     <option value="Pending"
         ${row.status==="Pending"?"selected":""}>
 
-        Pending
+        🟡 Pending
 
     </option>
 
     <option value="Contacted"
         ${row.status==="Contacted"?"selected":""}>
 
-        Contacted
+        🟢 Contacted
 
     </option>
 
     <option value="Closed"
         ${row.status==="Closed"?"selected":""}>
 
-        Closed
+        🔵 Closed
 
     </option>
 
 </select>
 
 </td>
-
             <td>${row.created_at}</td>
 
             <td>
 
-                <button
-                    class="viewBtn"
-                    onclick="viewEnquiry(${index})">
+    <button
+        class="viewBtn"
+        onclick="viewEnquiry(${index})">
 
-                    View
+        View
 
-                </button>
+    </button>
 
-            </td>
+</td>
+
+<td>
+
+    <button
+        class="deleteBtn"
+        onclick="deleteEnquiry(${row.id})">
+
+        Delete
+
+    </button>
+
+</td>
 
         </tr>
 
@@ -290,7 +304,29 @@ async function updateStatus(id,status,element){
 
         }
 
-        element.className="statusSelect "+status.toLowerCase();
+       element.className = "statusSelect " + status.toLowerCase();
+
+switch(status){
+
+    case "Pending":
+
+        element.options[element.selectedIndex].text = "🟡 Pending";
+
+        break;
+
+    case "Contacted":
+
+        element.options[element.selectedIndex].text = "🟢 Contacted";
+
+        break;
+
+    case "Closed":
+
+        element.options[element.selectedIndex].text = "🔵 Closed";
+
+        break;
+
+}
 
     }
 
@@ -303,8 +339,200 @@ async function updateStatus(id,status,element){
     }
 
 }
+// ===============================
+// Delete Enquiry
+// ===============================
+
+ function deleteEnquiry(id){
+
+    deleteId=id;
+
+    document.getElementById("deleteModal").style.display="flex";
+
+}function closeDeleteModal(){
+
+    document.getElementById("deleteModal").style.display="none";
+
+    deleteId=null;
+
+}
 
 
+async function confirmDelete(){
+
+    if(deleteId==null){
+
+        return;
+
+    }
+
+    const token=sessionStorage.getItem("adminToken");
+
+    try{
+
+        const res=await fetch("/api/delete-enquiry",{
+
+            method:"POST",
+
+            headers:{
+
+                "Content-Type":"application/json"
+
+            },
+
+            body:JSON.stringify({
+
+                token,
+
+                id:deleteId
+
+            })
+
+        });
+
+        const data=await res.json();
+
+        if(!res.ok){
+
+            showToast(data.error,"red");
+
+            return;
+
+        }
+
+        enquiries=enquiries.filter(
+
+            e=>e.id!==deleteId
+
+        );
+
+        updateCards();
+
+        renderTable(enquiries);
+
+        closeDeleteModal();
+
+        showToast("Enquiry deleted successfully!");
+
+    }
+
+    catch{
+
+        showToast("Unable to delete enquiry.","red");
+
+    }
+
+}function showToast(message,color="#22C55E"){
+
+    const toast=document.getElementById("toast");
+
+    toast.textContent=message;
+
+    toast.style.background=color;
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+
+        toast.classList.remove("show");
+
+    },3000);
+
+}
+// ===============================
+// Export CSV
+// ===============================
+
+function exportCSV(){
+
+    if(enquiries.length===0){
+
+        alert("No enquiries available.");
+
+        return;
+
+    }
+
+    const headers=[
+
+        "ID",
+
+        "Name",
+
+        "Phone",
+
+        "Email",
+
+        "Service",
+
+        "Message",
+
+        "Status",
+
+        "Created At",
+
+        "Updated At"
+
+    ];
+
+    const rows=enquiries.map(e=>[
+
+        e.id,
+
+        e.name,
+
+        e.phone,
+
+        e.email,
+
+        e.service,
+
+        e.message,
+
+        e.status,
+
+        e.created_at,
+
+        e.updated_at
+
+    ]);
+
+    const csv=[headers,...rows]
+
+        .map(row=>
+
+            row.map(value=>
+
+                `"${String(value ?? "").replace(/"/g,'""')}"`
+            ).join(",")
+
+        ).join("\n");
+
+    const blob=new Blob([csv],{
+
+        type:"text/csv;charset=utf-8;"
+
+    });
+
+    const url=URL.createObjectURL(blob);
+
+    const link=document.createElement("a");
+
+    const today=new Date().toISOString().slice(0,10);
+
+    link.href=url;
+
+    link.download=`Finnvisor_Enquiries_${today}.csv`;
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+
+}
 
 // ===============================
 // Logout

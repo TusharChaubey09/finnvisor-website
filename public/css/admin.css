@@ -201,7 +201,33 @@ VIEW BUTTON
     background:#1D4ED8;
 }
 
+/*==========================
+DELETE BUTTON
+==========================*/
 
+.deleteBtn{
+
+    background:#EF4444;
+
+    color:white;
+
+    border:none;
+
+    padding:8px 18px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.deleteBtn:hover{
+
+    background:#DC2626;
+
+}
 /*==========================
 MODAL
 ==========================*/
@@ -452,5 +478,280 @@ td{
     padding:22px;
 
 }
+
+}
+/*==========================
+STATUS BADGES
+==========================*/
+
+.status{
+
+    display:inline-block;
+
+    padding:8px 16px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    text-align:center;
+
+    min-width:110px;
+
+}
+
+.status.pending{
+
+    background:#FEF3C7;
+
+    color:#B45309;
+
+}
+
+.status.contacted{
+
+    background:#DCFCE7;
+
+    color:#15803D;
+
+}
+
+.status.closed{
+
+    background:#DBEAFE;
+
+    color:#1D4ED8;
+
+}
+/*==========================
+STATUS SELECT
+==========================*/
+
+.statusSelect{
+
+    border:none;
+
+    outline:none;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    appearance:none;
+
+    min-width:125px;
+
+    text-align:center;
+
+}
+
+.statusSelect.pending{
+
+    background:#FEF3C7;
+
+    color:#B45309;
+
+}
+
+.statusSelect.contacted{
+
+    background:#DCFCE7;
+
+    color:#15803D;
+
+}
+
+.statusSelect.closed{
+
+    background:#DBEAFE;
+
+    color:#1D4ED8;
+
+}
+/*==================================
+DELETE MODAL
+==================================*/
+
+#deleteModal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:5000;
+
+}
+
+.confirmBox{
+
+    width:420px;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:35px;
+
+    text-align:center;
+
+    animation:popup .25s ease;
+
+}
+
+.confirmBox h2{
+
+    margin-bottom:15px;
+
+    color:#0F172A;
+
+}
+
+.confirmBox p{
+
+    color:#475569;
+
+    margin-bottom:10px;
+
+}
+
+.confirmBox small{
+
+    color:#EF4444;
+
+}
+
+.confirmButtons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    margin-top:30px;
+
+}
+
+.cancelBtn{
+
+    background:#CBD5E1;
+
+    color:#0F172A;
+
+    border:none;
+
+    padding:12px 24px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+.confirmDeleteBtn{
+
+    background:#EF4444;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 24px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+.confirmDeleteBtn:hover{
+
+    background:#DC2626;
+
+}
+
+.cancelBtn:hover{
+
+    background:#94A3B8;
+
+}
+
+
+/*==================================
+TOAST
+==================================*/
+
+#toast{
+
+    position:fixed;
+
+    top:25px;
+
+    right:25px;
+
+    background:#22C55E;
+
+    color:white;
+
+    padding:15px 28px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    opacity:0;
+
+    transform:translateY(-20px);
+
+    transition:.35s;
+
+    z-index:6000;
+
+}
+
+#toast.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+
+/*==================================
+ANIMATION
+==================================*/
+
+@keyframes popup{
+
+    from{
+
+        transform:scale(.9);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
 
 }

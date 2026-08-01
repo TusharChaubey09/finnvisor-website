@@ -14,6 +14,11 @@
 
 <body>
 
+
+<!-- ===========================
+LOGIN PAGE
+=========================== -->
+
 <div class="login-page" id="loginPage">
 
     <div class="login-box">
@@ -40,6 +45,11 @@
 </div>
 
 
+
+<!-- ===========================
+DASHBOARD
+=========================== -->
+
 <div class="dashboard" id="dashboard" style="display:none;">
 
 <header>
@@ -53,6 +63,7 @@ Logout
 </button>
 
 </header>
+
 
 <div class="stats">
 
@@ -74,20 +85,199 @@ Logout
 
 </div>
 
+<div class="toolbar">
+
+    <button
+        class="exportBtn"
+        onclick="exportCSV()">
+
+        📥 Export CSV
+
+    </button>
+
+</div>
+
+<div class="search">
+
 <div class="search">
 
 <input
+
 type="text"
+
 id="searchInput"
-placeholder="Search by Name, Phone or Email">
+
+placeholder="Search by Name, Service or Status">
 
 </div>
+
 
 <div id="tableContainer"></div>
 
 </div>
 
-<script src="js/admin.js"></script>
 
+
+<!-- ===========================
+VIEW ENQUIRY MODAL
+=========================== -->
+
+<div class="modal" id="viewModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Customer Details</h2>
+
+            <button
+                class="closeBtn"
+                onclick="closeModal()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="detail-row">
+
+                <strong>Name</strong>
+
+                <span id="modalName"></span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Phone</strong>
+
+                <span id="modalPhone"></span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Email</strong>
+
+                <span id="modalEmail"></span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Service</strong>
+
+                <span id="modalService"></span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Status</strong>
+
+                <span id="modalStatus"></span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Created</strong>
+
+                <span id="modalCreated"></span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Updated</strong>
+
+                <span id="modalUpdated"></span>
+
+            </div>
+
+            <div class="detail-message">
+
+                <strong>Requirement</strong>
+
+                <p id="modalMessage"></p>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                class="closeModalBtn"
+                onclick="closeModal()">
+
+                Close
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- =====================================
+DELETE CONFIRMATION MODAL
+====================================== -->
+
+<div class="modal" id="deleteModal">
+
+    <div class="confirmBox">
+
+        <h2>Delete Enquiry</h2>
+
+        <p>
+
+            Are you sure you want to delete this enquiry?
+
+        </p>
+
+        <small>
+
+            This action cannot be undone.
+
+        </small>
+
+        <div class="confirmButtons">
+
+            <button
+                class="cancelBtn"
+                onclick="closeDeleteModal()">
+
+                Cancel
+
+            </button>
+
+            <button
+                class="confirmDeleteBtn"
+                onclick="confirmDelete()">
+
+                Delete
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================
+TOAST MESSAGE
+====================================== -->
+
+<div id="toast"></div>
+
+
+<script src="js/admin.js"></script>
 </body>
+
 </html>
