@@ -124,5 +124,16 @@ submitBtn.disabled=false;
 submitBtn.textContent="Schedule Free Consultation";
 
 });
+}
+function openCallPopup(){
+
+    document.getElementById("callPopup").classList.add("active");
 
 }
+
+function closeCallPopup(){
+
+    document.getElementById("callPopup").classList.remove("active");
+
+}
+

@@ -456,9 +456,9 @@ CONTACT INFORMATION
 
     <div class="container">
 
-        <span class="section-tag">
+        <!-- <span class="section-tag">
             CONTACT
-        </span>
+        </span> -->
 
         <h2>Get In Touch</h2>
 
@@ -470,15 +470,38 @@ CONTACT INFORMATION
 
             <div class="contact-card">
 
-                <div class="contact-icon">
-                    📞
-                </div>
+    <div class="contact-icon">
+        📞
+    </div>
 
-                <h3>Phone</h3>
+    <h3>Phone</h3>
 
-                <p>+91 8700390278</p>
+    <p>
 
-            </div>
+        +91 8700390278<br>
+        +91 9902928302
+
+    </p>
+
+    <div class="contact-actions">
+
+        <button class="call-btn" onclick="openCallPopup()">
+
+            📞 Call Now
+
+        </button>
+
+        <a href="https://wa.me/919902928302"
+           target="_blank"
+           class="whatsapp-btn">
+
+            💬 WhatsApp
+
+        </a>
+
+    </div>
+
+</div>
 
             <div class="contact-card">
 
@@ -488,7 +511,9 @@ CONTACT INFORMATION
 
                 <h3>Email</h3>
 
-                <p>info@finnvisor.com</p>
+                <p><a href="mailto:info@finnvisor.com">
+                 info@finnvisor.com </a>
+                </p>
 
             </div>
 
@@ -500,10 +525,10 @@ CONTACT INFORMATION
 
                 <h3>Registered Office</h3>
 
-                <p>
+                <p><a href="https://maps.google.com/?q=A-87 B4 Basement Sector4 Noida-201301 India"target="_blank">
                     A87 B4 Basement Sector 4<br>
                     Noida-201301<br>
-                    India
+                    </a>
                 </p>
 
             </div>
@@ -513,6 +538,33 @@ CONTACT INFORMATION
     </div>
 
 </section>
+<div id="callPopup" class="call-popup">
+
+    <div class="popup-box">
+
+        <h3>Select a Number</h3>
+
+        <a href="tel:+918700390278">
+
+            📞 +91 8700390278
+
+        </a>
+
+        <a href="tel:+919123456789">
+
+            📞 +91 9902928302
+
+        </a>
+
+        <button onclick="closeCallPopup()">
+
+            Cancel
+
+        </button>
+
+    </div>
+
+</div>
 <footer class="footer">
 
     <div class="container">
@@ -524,6 +576,7 @@ CONTACT INFORMATION
     </div>
 
 </footer>
+
 
 <script src="js/script.js"></script>
 </body>
